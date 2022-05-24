@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  CircleMarker,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./displaymap.css";
-import L from "leaflet";
 
 const DisplayMap = () => {
   const [coordinates, setcoordinates] = useState([53.126126, 30.318214]);
   const [covidCountryData, setCovideCountryData] = useState([]);
-
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-    iconUrl: require("leaflet/dist/images/marker-icon.png"),
-    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-  });
 
   useEffect(() => {
     const covidStats = async () => {
@@ -36,7 +34,11 @@ const DisplayMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {covidCountryData.map((covidNumbers) => (
-          <Marker
+          <CircleMarker
+            center={[
+              covidNumbers.coordinates.latitude,
+              covidNumbers.coordinates.longitude,
+            ]}
             // key={covidNumbers.toString()}
             position={[
               covidNumbers.coordinates.latitude,
@@ -46,13 +48,14 @@ const DisplayMap = () => {
             <Popup position={[covidNumbers.country, covidNumbers.country]}>
               <div>
                 <p>
-                  Country: {`${covidNumbers.province}, ${covidNumbers.country}`} <br />
+                  Country: {`${covidNumbers.province}, ${covidNumbers.country}`}{" "}
+                  <br />
                   Confirmed cases: {covidNumbers.stats.confirmed} <br />
                   Confirmed deaths: {covidNumbers.stats.deaths}
                 </p>
               </div>
             </Popup>
-          </Marker>
+          </CircleMarker>
         ))}
       </MapContainer>
     </div>
