@@ -46,8 +46,7 @@ const DisplayMap = () => {
             <Popup position={[covidNumbers.country, covidNumbers.country]}>
               <div>
                 <p>
-                  Country: {covidNumbers.country} <br />
-                  Province: {covidNumbers.province} <br />
+                  Country: {`${covidNumbers.province}, ${covidNumbers.country}`} <br />
                   Confirmed cases: {covidNumbers.stats.confirmed} <br />
                   Confirmed deaths: {covidNumbers.stats.deaths}
                 </p>
