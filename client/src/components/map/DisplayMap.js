@@ -34,16 +34,12 @@ const DisplayMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {covidCountryData.map((covidNumbers) => (
-          <CircleMarker
+          <CircleMarker color="red" fillOpacity={1}
             center={[
               covidNumbers.coordinates.latitude,
               covidNumbers.coordinates.longitude,
             ]}
             // key={covidNumbers.toString()}
-            position={[
-              covidNumbers.coordinates.latitude,
-              covidNumbers.coordinates.longitude,
-            ]}
           >
             <Popup position={[covidNumbers.country, covidNumbers.country]}>
               <div>
