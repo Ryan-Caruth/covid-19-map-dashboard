@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./displaymap.css";
 import L from "leaflet";
@@ -42,7 +42,18 @@ const DisplayMap = () => {
               covidNumbers.coordinates.latitude,
               covidNumbers.coordinates.longitude,
             ]}
-          ></Marker>
+          >
+            <Popup position={[covidNumbers.country, covidNumbers.country]}>
+              <div>
+                <p>
+                  Country: {covidNumbers.country} <br />
+                  Province: {covidNumbers.province} <br />
+                  Confirmed cases: {covidNumbers.stats.confirmed} <br />
+                  Confirmed deaths: {covidNumbers.stats.deaths}
+                </p>
+              </div>
+            </Popup>
+          </Marker>
         ))}
       </MapContainer>
     </div>
